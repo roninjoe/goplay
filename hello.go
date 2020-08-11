@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"example.com/user/hello/morestrings"
 )
@@ -21,6 +22,11 @@ func (a animal) Age() int {
 func (a animal) Name() string {
 	return a.name
 }
+
+func HelloServer(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello, %s!", r.URL.Path[1:])
+}
+
 func main() {
 	fmt.Printf(morestrings.ReverseRunes("\nHello Go"))
 
@@ -28,4 +34,8 @@ func main() {
 
 	// Really tedious print of a simple string with a few vars plugged in
 	fmt.Printf(fmt.Sprintf("%s is %d\n", myDog.Name(), myDog.Age()))
+
+	// Add a web server
+	http.HandleFunc("/", HelloServer)
+	http.ListenAndServe(":8080", nil)
 }
