@@ -25,6 +25,7 @@ func main() {
 	fmt.Printf(morestrings.ReverseRunes("\nHello Go"))
 
 	myDog := animal{"Fred", 3}
-	fmt.Println(myDog.Age())
-	fmt.Println(myDog.Name())
+
+	// Really tedious print of a simple string with a few vars plugged in
+	fmt.Printf(fmt.Sprintf("%s is %d\n", myDog.Name(), myDog.Age()))
 }
